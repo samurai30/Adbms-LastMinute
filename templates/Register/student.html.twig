@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Student Register{% endblock %}
+
+{% block body %}
+    <nav></nav>
+    <div class="container">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="input-field">
+
+                {{ form_widget(form.course) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
