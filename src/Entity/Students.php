@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\StudentsRepository")
+ * @UniqueEntity(fields="email", message="This E-mail is already used")\
+ * @UniqueEntity(fields="username", message="This username is already taken")
  */
 class Students implements UserInterface,\Serializable
 {

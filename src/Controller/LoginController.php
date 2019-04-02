@@ -20,4 +20,6 @@ class LoginController extends AbstractController
             'error' => $authenticationUtils->getLastAuthenticationError()
         ]);
     }
+
+
 }

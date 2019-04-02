@@ -23,11 +23,6 @@ class Questions
      */
     private $question;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Subjects", inversedBy="questions")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $subject;
 
     /**
      * @ORM\Column(type="float")
@@ -38,6 +33,17 @@ class Questions
      * @ORM\ManyToMany(targetEntity="App\Entity\Tags", mappedBy="questions")
      */
     private $tags;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Chapters", inversedBy="questions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $chapter;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $answers;
 
     public function __construct()
     {
@@ -61,18 +67,7 @@ class Questions
 
         return $this;
     }
-
-    public function getSubject(): ?Subjects
-    {
-        return $this->subject;
-    }
-
-    public function setSubject(?Subjects $subject): self
-    {
-        $this->subject = $subject;
-
-        return $this;
-    }
+    
 
     public function getMarks(): ?float
     {
@@ -110,6 +105,30 @@ class Questions
             $this->tags->removeElement($tag);
             $tag->removeQuestion($this);
         }
+
+        return $this;
+    }
+
+    public function getChapter(): ?Chapters
+    {
+        return $this->chapter;
+    }
+
+    public function setChapter(?Chapters $chapter): self
+    {
+        $this->chapter = $chapter;
+
+        return $this;
+    }
+
+    public function getAnswers(): ?string
+    {
+        return $this->answers;
+    }
+
+    public function setAnswers(string $answers): self
+    {
+        $this->answers = $answers;
 
         return $this;
     }

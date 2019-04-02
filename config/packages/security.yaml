@@ -16,10 +16,12 @@ security:
             anonymous: true
             provider: student_user
             form_login:
-                login_path: homepage
+                login_path: studentLogin
                 check_path: studentLogin
                 csrf_token_generator: security.csrf.token_manager
-                default_target_path: studentLogin
+                default_target_path: homepage
+            logout:
+                path: logoutPath
 
             # activate different ways to authenticate
 

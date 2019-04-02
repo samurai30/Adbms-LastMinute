@@ -6,11 +6,11 @@ use App\Entity\Students;
 use App\Form\StudentFormType;
 use App\Form\StudentsType;
 use NlpTools\Similarity\CosineSimilarity;
-use NlpTools\Similarity\Euclidean;
 use NlpTools\Tokenizers\WhitespaceTokenizer;
-use NlpTools\Similarity\Simhash;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -39,9 +39,19 @@ class HomepageController extends AbstractController
     }
 
     /**
+     * @Route("/test", name="trying")
+     * @param Request $request
+     * @return void
+     */
+    public function test(Request $request){
+
+
+    }
+
+    /**
      * @Route("/register/student", name="studentRegister")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function studentRegister(Request $request)
     {

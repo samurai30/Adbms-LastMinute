@@ -3,5 +3,16 @@
 {% block title %}Hello HomepageController!{% endblock %}
 
 {% block body %}
+   {% if is_granted('ROLE_USER') %}
+
+        {{ app.user.username }}
+    {% endif %}
+
     <a href="{{ path('studentRegister') }}">Register</a>
+    <a href="{{ path('studentLogin') }}">Login</a>
+    <a href="{{ path('logoutPath') }}">Logout</a>
+
+    <div class="container">
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
 {% endblock %}

@@ -8,7 +8,7 @@
         {{ form_start(form) }}
         <div class="row">
             <div class="input-field">
-
+               <p class="red-text">  {{ form_errors(form.course) }}</p>
                 {{ form_widget(form.course) }}
             </div>
         </div>

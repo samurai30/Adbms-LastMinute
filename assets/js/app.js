@@ -1,10 +1,61 @@
 
 const $ = require('jquery');
 global.$ = global.jQuery = $;
-require('materialize-css/dist/js/materialize')
+require('materialize-css/dist/js/materialize');
+const Chart = require('chart.js');
+const axios = require('axios');
 
+let ctx = $('#myChart');
 
-$(document).ready(function () {
+let myChart = new Chart(ctx, {
+   type: 'doughnut',
+   data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+         label: '# of Votes',
+         data: [12, 19, 3, 5, 2, 3],
+         backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+         ],
+         borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+         ],
+         borderWidth: 1
+      }]
+   },
+   options: {
+   }
+});
+/*
+
+import * as use from '@tensorflow-models/universal-sentence-encoder';*/
+
+require('regenerator-runtime/runtime');
+
+$(document).ready(async function () {
 
    $('select').formSelect();
+
+  /* const trys = await  use.loadTokenizer();
+   const data = await trys.encode("how old are you?");
+   const data2 = await  trys.encode("what is your age?");
+   let variable = [];
+   variable.push(data,data2);
+   axios.get('/test',{ params: {
+         sim: variable
+      }}).then((res)=>{
+      console.log(res);
+   });*/
+
+
 });

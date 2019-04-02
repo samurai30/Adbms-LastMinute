@@ -36,14 +36,16 @@ class Subjects
     private $sem;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Questions", mappedBy="subject", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Chapters", mappedBy="subject", orphanRemoval=true)
      */
-    private $questions;
+    private $chapters;
 
     public function __construct()
     {
-        $this->questions = new ArrayCollection();
+        $this->chapters = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {
@@ -87,33 +89,35 @@ class Subjects
     }
 
     /**
-     * @return Collection|Questions[]
+     * @return Collection|Chapters[]
      */
-    public function getQuestions(): Collection
+    public function getChapters(): Collection
     {
-        return $this->questions;
+        return $this->chapters;
     }
 
-    public function addQuestion(Questions $question): self
+    public function addChapter(Chapters $chapter): self
     {
-        if (!$this->questions->contains($question)) {
-            $this->questions[] = $question;
-            $question->setSubject($this);
+        if (!$this->chapters->contains($chapter)) {
+            $this->chapters[] = $chapter;
+            $chapter->setSubject($this);
         }
 
         return $this;
     }
 
-    public function removeQuestion(Questions $question): self
+    public function removeChapter(Chapters $chapter): self
     {
-        if ($this->questions->contains($question)) {
-            $this->questions->removeElement($question);
+        if ($this->chapters->contains($chapter)) {
+            $this->chapters->removeElement($chapter);
             // set the owning side to null (unless already changed)
-            if ($question->getSubject() === $this) {
-                $question->setSubject(null);
+            if ($chapter->getSubject() === $this) {
+                $chapter->setSubject(null);
             }
         }
 
         return $this;
     }
+
+
 }
