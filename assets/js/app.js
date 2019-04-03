@@ -36,26 +36,21 @@ let myChart = new Chart(ctx, {
    options: {
    }
 });
-/*
 
-import * as use from '@tensorflow-models/universal-sentence-encoder';*/
+import * as use from '@tensorflow-models/universal-sentence-encoder';
+
+const cs = require('compute-cosine-similarity');
 
 require('regenerator-runtime/runtime');
 
 $(document).ready(async function () {
 
    $('select').formSelect();
+   const model = await  use.load();
+   const sentences= ['ham','cheese'];
 
-  /* const trys = await  use.loadTokenizer();
-   const data = await trys.encode("how old are you?");
-   const data2 = await  trys.encode("what is your age?");
-   let variable = [];
-   variable.push(data,data2);
-   axios.get('/test',{ params: {
-         sim: variable
-      }}).then((res)=>{
-      console.log(res);
-   });*/
+
+   const emd = await model.embed(sentences);
 
 
 });
