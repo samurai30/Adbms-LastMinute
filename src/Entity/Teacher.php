@@ -3,10 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TeacherRepository")
+ * @UniqueEntity(fields="email", message="This E-mail is already used")\
+ * @UniqueEntity(fields="username", message="This username is already taken")
  */
 class Teacher implements UserInterface,\Serializable
 {
@@ -19,16 +24,22 @@ class Teacher implements UserInterface,\Serializable
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Enter a first name")
+     * @Assert\Length(min=3,max=20)
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Enter a last name")
+     * @Assert\Length(min=3,max=20)
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Enter a name")
+     * @Assert\Length(min=5,max=15)
      */
     private $username;
 
@@ -39,16 +50,21 @@ class Teacher implements UserInterface,\Serializable
 
     /**
      * @ORM\Column(type="string", length=60)
+     * @Assert\NotBlank(message="Please enter email.")
+     * @Assert\Email
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Assert\NotBlank(message="select a gender")
      */
     private $gender;
 
     /**
      * @return mixed
+     * @Assert\NotBlank(message="Please provide a password")
+     * @Assert\Length(min=5,max=20)
      */
     public function getPlainpassword()
     {

@@ -36,5 +36,11 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Subjects }
 
+    admin.teachers:
+        class: App\Admin\TeacherAdmin
+        arguments: [~, App\Entity\Teacher, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Teachers }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
