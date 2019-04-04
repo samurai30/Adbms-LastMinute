@@ -71,7 +71,7 @@ class HomepageController extends AbstractController
             $em->persist($student);
             $em->flush();
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('studentLogin');
 
 
         }
