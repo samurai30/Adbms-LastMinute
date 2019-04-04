@@ -4,7 +4,7 @@ global.$ = global.jQuery = $;
 require('materialize-css/dist/js/materialize');
 const Chart = require('chart.js');
 const axios = require('axios');
-
+/*
 let ctx = $('#myChart');
 
 let myChart = new Chart(ctx, {
@@ -36,8 +36,9 @@ let myChart = new Chart(ctx, {
    options: {
    }
 });
-const tf = require('@tensorflow/tfjs');
-import * as use from '@tensorflow-models/universal-sentence-encoder';
+*/
+
+const use = require('@tensorflow-models/universal-sentence-encoder');
 
 const cs = require('compute-cosine-similarity');
 
@@ -46,12 +47,9 @@ require('regenerator-runtime/runtime');
 $(document).ready(async function () {
 
    $('select').formSelect();
-   const model = await  use.load();
-   const sentences= ['ham','cheese'];
-   const emd = await model.embed(sentences);
+   
 
-   console.log(emd.conv1d()
-   );
+
 
 
 });

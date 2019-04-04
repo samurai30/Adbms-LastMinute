@@ -6,6 +6,7 @@ use App\Entity\Students;
 use App\Form\StudentFormType;
 use App\Form\StudentsType;
 use NlpTools\Similarity\CosineSimilarity;
+use NlpTools\Similarity\Euclidean;
 use NlpTools\Tokenizers\WhitespaceTokenizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -45,7 +46,15 @@ class HomepageController extends AbstractController
      */
     public function test(Request $request){
 
+        $cos = new CosineSimilarity();
+        $tk1 = new WhitespaceTokenizer();
+        $stn1 = 'what is the meaning of semantics';
+        $stn2 = 'define semantics';
+        $tk = $tk1->tokenize($stn1);
+        $tk2 = $tk1->tokenize($stn2);
 
+        dump($cos->similarity($tk,$tk2));
+         die;
     }
 
     /**
