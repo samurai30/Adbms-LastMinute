@@ -33,7 +33,8 @@ class SubjectsAdmin extends AbstractAdmin
 
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        $filter->add('subName');
+        $filter->add('subName')
+        ->add('course');
     }
 
     protected function configureListFields(ListMapper $list)
