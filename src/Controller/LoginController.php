@@ -10,7 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends AbstractController
 {
     /**
-     * @Route("/student/login", name="studentLogin")
+     * @Route("/login", name="SecuredLogin")
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
@@ -21,18 +21,7 @@ class LoginController extends AbstractController
             'error' => $authenticationUtils->getLastAuthenticationError()
         ]);
     }
-    /**
-     * @Route("/teacher/login", name="teacherLogin")
-     * @param AuthenticationUtils $authenticationUtils
-     * @return Response
-     */
-    public function teacherLogin(AuthenticationUtils $authenticationUtils)
-    {
-        return $this->render('login/index.html.twig', [
-            'lastname' => $authenticationUtils->getLastUsername(),
-            'error' => $authenticationUtils->getLastAuthenticationError()
-        ]);
-    }
+
 
 
 

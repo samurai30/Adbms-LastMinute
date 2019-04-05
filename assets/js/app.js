@@ -40,11 +40,16 @@ let myChart = new Chart(ctx, {
 
 const use = require('@tensorflow-models/universal-sentence-encoder');
 
+const  tf = require('@tensorflow/tfjs');
 const cs = require('compute-cosine-similarity');
 
 require('regenerator-runtime/runtime');
 
-
+const sentences = [
+   'Dbms is very important subject',
+   'One of the important subject is Dbms',
+    'explain c++'
+];
 
 
 $(document).ready(async function () {
@@ -54,6 +59,35 @@ $(document).ready(async function () {
    $('.tabs').tabs({
       duration: 800
    });
+
+
+   const model = await use.load();
+    const embeddings = await model.embed(sentences);
+
+
+/*
+   const sim = await tf.sum(tf.mul(emb1,emb2),1);
+   const clip = await tf.clipByValue(sim,-1.0,1.0);
+   const acos = await tf.acos(clip);
+   const cosSim = (1.0 - acos);
+   */
+
+
+
+   for (let i = 0; i < sentences.length; i++) {
+      for (let j = i; j < sentences.length; j++) {
+         const sentenceI = embeddings.slice([i, 0], [1]);
+         const sentenceJ = embeddings.slice([j, 0], [1]);
+         const sentenceITranspose = false;
+         const sentenceJTransepose = true;
+         const score =
+             sentenceI.matMul(sentenceJ, sentenceITranspose, sentenceJTransepose)
+                 .dataSync();
+         console.log(score);
+         console.log(i+" "+j);
+
+      }
+   }
 
 
 

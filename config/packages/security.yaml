@@ -3,7 +3,11 @@ security:
     encoders:
         App\Entity\Students: bcrypt
         App\Entity\Teacher: bcrypt
+
     providers:
+        chain_provider:
+            chain:
+                providers: [student_user, teacher_user]
         student_user:
             entity: { class: App\Entity\Students, property: username}
         teacher_user:
@@ -13,25 +17,17 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         teacher_auth:
-            pattern:   ^/teacher
-            anonymous: true
-            provider: teacher_user
-            form_login:
-                login_path: teacherLogin
-                check_path: teacherLogin
-                default_target_path: teacher
-            logout:
-                path: logoutPathTeacher
-        student_auth:
             pattern:   ^/
             anonymous: true
-            provider: student_user
+            provider: chain_provider
             form_login:
-                login_path: studentLogin
-                check_path: studentLogin
+                login_path: SecuredLogin
+                check_path: SecuredLogin
                 default_target_path: homepage
             logout:
-                path: logoutPathStudent
+                path: logoutPath
+                target: homepage
+
 
 
 
