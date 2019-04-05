@@ -47,7 +47,10 @@ require('regenerator-runtime/runtime');
 $(document).ready(async function () {
 
    $('select').formSelect();
-   
+   $('.tabs').tabs();
+   $('.tabs').tabs({
+      duration: 800
+   });
 
 
 

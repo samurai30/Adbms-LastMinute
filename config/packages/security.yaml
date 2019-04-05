@@ -12,6 +12,16 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        teacher_auth:
+            pattern:   ^/teacher
+            anonymous: true
+            provider: teacher_user
+            form_login:
+                login_path: teacherLogin
+                check_path: teacherLogin
+                default_target_path: teacher
+            logout:
+                path: logoutPathTeacher
         student_auth:
             pattern:   ^/
             anonymous: true
@@ -19,10 +29,11 @@ security:
             form_login:
                 login_path: studentLogin
                 check_path: studentLogin
-                csrf_token_generator: security.csrf.token_manager
                 default_target_path: homepage
             logout:
-                path: logoutPath
+                path: logoutPathStudent
+
+
 
             # activate different ways to authenticate
 

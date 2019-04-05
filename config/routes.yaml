@@ -2,5 +2,8 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-logoutPath:
-  path: /logout
+logoutPathStudent:
+  path: /student/logout
+
+logoutPathTeacher:
+  path: /teacher/logout

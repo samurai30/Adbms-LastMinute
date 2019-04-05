@@ -20,7 +20,10 @@
                     <ul class="right">
                         {% if is_granted('ROLE_USER') %}
                             <li>{{ app.user.username }}</li>
-                            <li><a href="{{ path('logoutPath') }}">Logout</a></li>
+                            <li><a href="{{ path('logoutPathStudent') }}">Logout</a></li>
+                        {% elseif is_granted('ROLE_TEACHER') %}
+                            <li>{{ app.user.username }}</li>
+                            <li><a href="{{ path('logoutPathTeacher') }}">Logout</a></li>
                         {% else %}
                             <li><a href="{{ path('studentRegister') }}">Register</a></li>
                             <li><a href="{{ path('studentLogin') }}">Login</a></li>
