@@ -17,6 +17,7 @@
         "axios": "^0.18.0",
         "chart.js": "^2.8.0",
         "compute-cosine-similarity": "^1.0.0",
+        "hopcroft-karp": "^0.0.2",
         "jquery": "^3.3.1",
         "materialize-css": "^1.0.0",
         "regenerator-runtime": "^0.13.2"

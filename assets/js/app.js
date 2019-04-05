@@ -44,6 +44,9 @@ const cs = require('compute-cosine-similarity');
 
 require('regenerator-runtime/runtime');
 
+
+
+
 $(document).ready(async function () {
 
    $('select').formSelect();
@@ -51,6 +54,7 @@ $(document).ready(async function () {
    $('.tabs').tabs({
       duration: 800
    });
+
 
 
 
