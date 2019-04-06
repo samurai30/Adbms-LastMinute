@@ -82,6 +82,12 @@ class Teacher implements UserInterface,\Serializable
 
     private $plainpassword;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Courses", inversedBy="teachers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $course;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -233,5 +239,17 @@ class Teacher implements UserInterface,\Serializable
         list($this->id,
             $this->username,
             $this->password) = unserialize($serialized);
+    }
+
+    public function getCourse(): ?Courses
+    {
+        return $this->course;
+    }
+
+    public function setCourse(?Courses $course): self
+    {
+        $this->course = $course;
+
+        return $this;
     }
 }

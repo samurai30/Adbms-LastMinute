@@ -35,10 +35,16 @@ class Courses
      */
     private $students;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Teacher", mappedBy="course", orphanRemoval=true)
+     */
+    private $teachers;
+
     public function __construct()
     {
         $this->subjects = new ArrayCollection();
         $this->students = new ArrayCollection();
+        $this->teachers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,5 +129,36 @@ class Courses
     public function __toString()
     {
         return $this->courseName;
+    }
+
+    /**
+     * @return Collection|Teacher[]
+     */
+    public function getTeachers(): Collection
+    {
+        return $this->teachers;
+    }
+
+    public function addTeacher(Teacher $teacher): self
+    {
+        if (!$this->teachers->contains($teacher)) {
+            $this->teachers[] = $teacher;
+            $teacher->setCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeacher(Teacher $teacher): self
+    {
+        if ($this->teachers->contains($teacher)) {
+            $this->teachers->removeElement($teacher);
+            // set the owning side to null (unless already changed)
+            if ($teacher->getCourse() === $this) {
+                $teacher->setCourse(null);
+            }
+        }
+
+        return $this;
     }
 }

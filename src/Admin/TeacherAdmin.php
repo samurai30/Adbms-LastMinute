@@ -4,10 +4,12 @@
 namespace App\Admin;
 
 
+use App\Entity\Courses;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -20,7 +22,11 @@ class TeacherAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $form)
     {
-        $form->add('firstName',TextType::class)
+        $form
+            ->add('course',EntityType::class,[
+                'class' => Courses::class
+            ])
+            ->add('firstName',TextType::class)
             ->add('lastName',TextType::class)
             ->add('username',TextType::class)
             ->add('plainPassword', RepeatedType::class, array(

@@ -21,7 +21,6 @@
                         {% if is_granted('ROLE_USER') or is_granted('ROLE_TEACHER')%}
                             <li>{{ app.user.username }}</li>
                             <li><a href="{{ path('logoutPath') }}">Logout</a></li>
-
                         {% else %}
                             <li><a href="{{ path('studentRegister') }}">Register</a></li>
                             <li><a href="{{ path('SecuredLogin') }}">Login</a></li>
