@@ -28,19 +28,25 @@ services:
         class: App\Admin\CourseAdmin
         arguments: [~, App\Entity\Courses, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Courses }
+            - { name: sonata.admin, manager_type: orm, group: 'College Programs', label: Courses }
 
     admin.subjects:
         class: App\Admin\SubjectsAdmin
         arguments: [~, App\Entity\Subjects, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Subjects }
+            - { name: sonata.admin, manager_type: orm, group: 'College Programs', label: Subjects }
 
     admin.teachers:
         class: App\Admin\TeacherAdmin
         arguments: [~, App\Entity\Teacher, ~ ]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Teachers }
+            - { name: sonata.admin, manager_type: orm, group: 'Faculty', label: Teachers }
+
+    admin.semester:
+        class: App\Admin\SemesterAdmin
+        arguments: [~, App\Entity\Semester, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'College Programs', label: Semester }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

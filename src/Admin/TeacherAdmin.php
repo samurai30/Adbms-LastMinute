@@ -56,6 +56,8 @@ class TeacherAdmin extends AbstractAdmin
     public function prePersist($object)
     {
         $plainPassword = $object->getPlainPassword();
+        $username = $object->getUsername()."-chw";
+        $object->setUsername($username);
         $container = $this->getConfigurationPool()->getContainer();
         $encoder = $container->get('security.password_encoder');
         $encoded = $encoder->encodePassword($object, $plainPassword);

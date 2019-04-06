@@ -1,8 +1,11 @@
 sonata_admin:
     title: 'Last-Minute'
+    title_logo: bundles/sonataadmin/logo_title.png
+    search: false
     dashboard:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
+
 
 sonata_block:
     blocks:
