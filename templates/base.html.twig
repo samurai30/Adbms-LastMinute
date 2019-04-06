@@ -9,33 +9,72 @@
              <link href="{{ asset('build/app/css.css') }}" rel="stylesheet">
         {% endblock %}
     </head>
-    <body>
+    <body class="deep-purple darken-2">
         {% block navbar %}
 
-            <nav class="cyan">
-
-                <div class="nav-wrapper">
-                    <a class="brand-logo" href="{{ path('homepage') }}">Last-Minute</a>
-
-                    <ul class="right">
-                        {% if is_granted('ROLE_USER') or is_granted('ROLE_TEACHER')%}
-                            <li>{{ app.user.username }}</li>
-                            <li><a href="{{ path('logoutPath') }}">Logout</a></li>
-                        {% else %}
-                            <li><a href="{{ path('studentRegister') }}">Register</a></li>
-                            <li><a href="{{ path('SecuredLogin') }}">Login</a></li>
-                        {% endif %}
-                    </ul>
-
-                </div>
-
-
-            </nav>
+            <header class="navbar-fixed">
+                <nav class="row deep-purple darken-3">
+                    <div class="col s12">
+                        <a href="{{ path('homepage') }}" class="brand-logo" style="font-family: 'Architects Daughter', cursive;">Last Minute</a>
+                        <ul class="right">
+                            {% if is_granted('ROLE_USER') or is_granted('ROLE_TEACHER')%}
+                                <li>{{ app.user.username }}</li>
+                                <li><a href="{{ path('logoutPath') }}" class="btn btn-floating btn-large deep-purple lighten-3"><i class="large material-icons">exit_to_app</i></a></li>
+                            {% else %}
+                                <li><a href="{{ path('studentRegister') }}" class="btn btn-floating btn-large deep-purple lighten-2"><i class="large material-icons">person_add</i></a></li>
+                                <li><a href="{{ path('SecuredLogin') }}" class="btn btn-large btn-floating deep-purple lighten-4"><i class="large material-icons">person</i></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+            </header>
         {% endblock %}
         {% block body %}
         {% endblock %}
+        {% block footer %}
+            <div class="fixed-action-btn">
+                <a href="#message" class="modal-trigger btn btn-large btn-floating amber waves-effect waves-light">
+                    <i class="large material-icons">message</i>
+                </a>
+            </div>
+            <div id="message" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <h4>Contact</h4>
+                    <p>coming soon...</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="modal-action modal-close waves-effect btn-flat">close</a>
+                </div>
+            </div>
+
+            <footer class="page-footer deep-purple darken-3">
+                <div class="footer-copyright deep-purple darken-4">
+                    <div class="container">
+
+                    </div>
+                </div>
+            </footer>
+
+        {% endblock %}
         {% block javascripts %}
             <script src="{{ asset('build/app.js') }}"></script>
+            <script src='https://cdn.jsdelivr.net/gh/naptha/tesseract.js@v1.0.14/dist/tesseract.min.js'></script>
+            <script>
+                $("#Question").change(function (e) {
+                    Tesseract.recognize(this.files[0],{
+                        lang: 'eng'
+                    })
+                        .progress(message => console.log(message))
+                        .catch(err => console.error(err))
+                        .then(result => {
+                          $.each(result.paragraphs,function (key,value) {
+                              $("#resultQuestion").append("<p>"+value.text+"</p>");
+                          })
+                        })
+                        .finally(resultOrError => console.log(resultOrError))
+                });
+
+            </script>
         {% endblock %}
     </body>
 </html>

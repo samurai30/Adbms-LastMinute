@@ -42,7 +42,7 @@ class StudentsType extends AbstractType
             ])
             ->add('submit',SubmitType::class,[
                 'label' => 'Register',
-                'attr' => ['class' => 'btn btn-large']
+                'attr' => ['class' => 'btn btn-large right deep-purple lighten-1']
             ])
         ;
     }

@@ -1,2 +1,21 @@
 @import "~materialize-css/dist/css/materialize.css";
 
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+h1.title,
+.footer-copyright a {
+    font-family: 'Architects Daughter', cursive;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+/* start welcome animation */
+

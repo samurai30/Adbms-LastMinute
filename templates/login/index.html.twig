@@ -3,35 +3,38 @@
 {% block title %}Hello LoginController!{% endblock %}
 
 {% block body %}
-    <div class="container" style="max-width: 600px">
-        <br>
-        <div class="row" style="padding: 10px;">
-            <div class="cyan lighten-1 white-text center" style="padding: 10px;">
-                <h4>LOGIN STUDENT | TEACHER</h4>
-            </div>
-            <form class="col s12" action="{{ path('SecuredLogin') }}" id="formLogin" method="post">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input placeholder="Username" id="username" name="_username" type="text" required="required" class="validate">
-                     </div>
-                    <div class="input-field col s12">
-                        <input id="password" placeholder="password" name="_password" type="password" class="validate" required="required">
-                     </div>
-                </div>
-                <div class="row center">
-                    {% if error %}
-                        <p>{{ error.message }}</p>
-                    {% endif %}
-                </div>
-                <div class="row right">
-                    <button type="submit" id="Login" name="Login" class="btn btn-large light-blue lighten-2">Login</button>
-                </div>
-                <div class="row">
-                    <a href="#">Forgot Password?</a>
-                </div>
+    <main class="valign-wrapper">
 
-            </form>
-        </div>
+     <div class="container" style="max-width: 600px;">
+         <div class="row white z-depth-4" style="padding: 10px; border-radius: 10px;" >
+             <div class="deep-purple-text lighten-1 center" style="padding: 10px;">
+                 <p class="flow-text">LOGIN STUDENT | TEACHER</p>
+             </div>
+             <form class="col s12" action="{{ path('SecuredLogin') }}" id="formLogin" method="post">
+                 <div class="row">
+                     <div class="input-field col s12">
+                         <input placeholder="Username" id="username" name="_username" type="text" required="required" class="validate">
+                     </div>
+                     <div class="input-field col s12">
+                         <input id="password" placeholder="password" name="_password" type="password" class="validate" required="required">
+                     </div>
+                 </div>
+                 <div class="row center">
+                     {% if error %}
+                         <p>{{ error.message }}</p>
+                     {% endif %}
+                 </div>
+                 <div class="row right">
+                     <input type="submit" value="Login" id="Login" name="Login" class="btn btn-large deep-purple lighten-1">
+                 </div>
+                 <div class="row">
+                     <a href="#">Forgot Password?</a>
+                 </div>
 
-    </div>
+             </form>
+         </div>
+     </div>
+
+    </main>
+
 {% endblock %}

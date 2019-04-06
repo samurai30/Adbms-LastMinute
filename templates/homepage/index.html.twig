@@ -6,6 +6,19 @@
 
     {% if is_granted('ROLE_TEACHER') %}
 
+        <main class="valign-wrapper">
+            <div class="container">
+                <div class="row center">
+
+                        <h4>welcome</h4>
+
+
+                    <a href="{{ path('teacher') }}" class="btn btn-large"><i class="large material-icons">add_circle_outline</i></a>
+                </div>
+            </div>
+
+
+        </main>
 
         {% elseif is_granted('ROLE_USER') %}
 
@@ -13,6 +26,19 @@
 
 
         {% else %}
+            <main class="valign-wrapper">
+    <span class="container grey-text text-lighten-1">
+
+             <p class="flow-text">Welcome to</p>
+         <h1 class="title grey-text text-lighten-3">Last Minute Studies</h1>
+
+          <blockquote class="flow-text">A place to study even when there is just a day left for exam</blockquote>
+            <p>Login to continue:</p><a href="{{ path('SecuredLogin') }}" class="btn btn-large btn-floating deep-purple lighten-4"><i class="large material-icons">person</i></a>
+
+
+             </span>
+            </main>
+
 
 
 
