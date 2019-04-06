@@ -19,6 +19,22 @@ class ChaptersRepository extends ServiceEntityRepository
         parent::__construct($registry, Chapters::class);
     }
 
+    public function getChapters($value){
+        $results = $this->createQueryBuilder('c')
+            ->select('c, cc')
+            ->leftJoin('c.subject', 'cc')
+            ->where('cc.course = :val')
+            ->setParameter('val',$value)
+            ->getQuery()
+            ->getResult();
+
+
+        $chapterArray = [];
+        foreach ($results as $result){
+            $chapterArray += [$result->getChapterName() => $result->getId()];
+        }
+        return $chapterArray;
+    }
     // /**
     //  * @return Chapters[] Returns an array of Chapters objects
     //  */

@@ -91,8 +91,9 @@ $(document).ready(async function () {
                  M.toast({html: toastSuccess});
                  M.toast({html: toastAddMore});
              }else {
-                 let toastError = '<span>I am toast content</span><button class="btn-flat toast-action">Undo</button>';
+                 let toastError = '<span>Sorry Something went wrong!</span><button class="btn-flat toast-action">Undo</button>';
                  M.toast({html: toastError});
+
              }
         });
      }

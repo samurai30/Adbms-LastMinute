@@ -3,13 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Students;
-use App\Form\StudentFormType;
 use App\Form\StudentsType;
-use NlpTools\Similarity\CosineSimilarity;
-use NlpTools\Similarity\Euclidean;
-use NlpTools\Tokenizers\WhitespaceTokenizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,23 +34,6 @@ class HomepageController extends AbstractController
 
     }
 
-    /**
-     * @Route("/test", name="trying")
-     * @param Request $request
-     * @return void
-     */
-    public function test(Request $request){
-
-        $cos = new CosineSimilarity();
-        $tk1 = new WhitespaceTokenizer();
-        $stn1 = 'what is the meaning of semantics';
-        $stn2 = 'define semantics';
-        $tk = $tk1->tokenize($stn1);
-        $tk2 = $tk1->tokenize($stn2);
-
-        dump($cos->similarity($tk,$tk2));
-         die;
-    }
 
     /**
      * @Route("/register/student", name="studentRegister")
@@ -80,7 +58,7 @@ class HomepageController extends AbstractController
             $em->persist($student);
             $em->flush();
 
-            return $this->redirectToRoute('studentLogin');
+            return $this->redirectToRoute('SecuredLogin');
 
 
         }
