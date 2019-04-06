@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Questions;
+use App\Form\QuestionsFilterType;
 use App\Form\StudentFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdater;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,13 +33,12 @@ class StudentController extends AbstractController
     public function index(Request $request)
     {
         $filterBuilder = $this->getDoctrine()->getRepository(Questions::class)->createQueryBuilder('e');
-
-        $form = $this->createForm(StudentFilterType::class,null,['user' => $this->getUser()]);
+        $form = $this->createForm(QuestionsFilterType::class,null,['user' => $this->getUser()]);
 
         $form->handleRequest($request);
         if($form->isSubmitted()){
             $this->builderUpdater->addFilterConditions($form,$filterBuilder);
-            $ques =  $filterBuilder->getQuery();
+            $ques =  $filterBuilder->getQuery()->getResult();
             dump($ques); die;
         }
 

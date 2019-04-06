@@ -6,6 +6,7 @@ use App\Entity\Subjects;
 use App\Repository\SubjectsRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\SharedableFilterType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,7 +35,7 @@ class StudentFilterType extends AbstractType
             ->add('subName',ChoiceFilterType::class,[
                     'choices' => $this->repository->getSubject($user->getCourse()->getId())
             ])
-            ->add('submit',SubmitType::class)
+
 
         ;
     }
@@ -45,5 +46,9 @@ class StudentFilterType extends AbstractType
             'data_class' => Subjects::class,
             'user' => null
         ]);
+    }
+    public function getParent()
+    {
+        return SharedableFilterType::class;
     }
 }

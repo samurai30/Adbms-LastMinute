@@ -28,7 +28,7 @@ class SubjectsRepository extends ServiceEntityRepository
 
         $subjectArray = [];
         foreach ($results as $result){
-            $subjectArray += [$result->getSubName() => $result->getId()];
+            $subjectArray += [$result->getSubName() => $result->getSubName()];
         }
         return $subjectArray;
 
