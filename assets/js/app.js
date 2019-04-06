@@ -60,6 +60,38 @@ $(document).ready(async function () {
    });
    $('.modal').modal();
    $('#Login').css({'zIndex':100});
+   $('.chips').chips();
+
+   $('#add_questions_Year').change(function () {
+      let selectedYear = $(this).children("option:selected").val();
+      $('.chips-placeholder').chips({
+         data: [{
+            tag: selectedYear,
+         }],
+         placeholder: 'Tags',
+         secondaryPlaceholder: '+Tag',
+      });
+   });
+
+   $('#add_questions').on('submit',function (e) {
+      e.preventDefault();
+      let tagsData = JSON.stringify(M.Chips.getInstance($('.chips')).chipsData) ;
+     if(tagsData === "[]"){
+         $('#errorTags').show()
+     }
+     else {
+        $('#errorTags').hide();
+         let formData = new FormData(e.target);
+         formData.append('chipsData',tagsData);
+        axios.post('/teacher/manual',formData).then((res)=>{
+             if(res.data === 'success'){
+                 $('#add_questions').trigger("reset");
+             }
+        });
+     }
+   })
+
+
 
 
    /*const model = await use.load();

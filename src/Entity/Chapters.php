@@ -19,7 +19,7 @@ class Chapters
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=50)
      */
     private $chapterName;
 
@@ -97,5 +97,9 @@ class Chapters
         }
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->chapterName;
     }
 }

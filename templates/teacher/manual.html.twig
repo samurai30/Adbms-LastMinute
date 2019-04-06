@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+    <main class="valign-wrapper">
+        <div class="container">
+
+         <div class="row white z-depth-3" style="padding: 4%; border-radius: 20px">
+             {{form_start(form,{'attr':{'id':'add_questions'}})}}
+                <div class="input-field">
+                    <label>Tags</label>
+                    <div class="chips chips-placeholder"></div>
+                    <p class="red-text" style="display: none" id="errorTags">Please enter tags</p>
+                </div>
+             {{ form_end(form) }}
+         </div>
+
+        </div>
+    </main>
+
+{% endblock %}

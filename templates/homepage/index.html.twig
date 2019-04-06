@@ -9,11 +9,24 @@
         <main class="valign-wrapper">
             <div class="container">
                 <div class="row center">
+                <div>
+                    <h1 class="white-text">Welcome To Teacher's Panel</h1>
+                </div>
+                    <hr style="border: 2px solid #e9632c;">
+                    <h5 class="orange-text lighten-4">Choose one to add Questions</h5>
+                <div class="col m3 offset-m3 s12">
+                       <span><p class="white-text">Scan Paper</p><a href="{{ path('scanPaper') }}" class="btn btn-large btn-floating deep-purple lighten-2"><i class="large material-icons">add_circle_outline</i></a>
 
-                        <h4>welcome</h4>
+                    </span>
+                </div>
+                <div class="col m3 s12">
+                        <span><p class="white-text">Add Manually</p><a href="{{ path('manualAdd') }}" class="btn btn-large btn-floating deep-purple lighten-1"><i class="large material-icons">add_circle_outline</i></a>
+
+                    </span>
+                </div>
 
 
-                    <a href="{{ path('teacher') }}" class="btn btn-large"><i class="large material-icons">add_circle_outline</i></a>
+
                 </div>
             </div>
 

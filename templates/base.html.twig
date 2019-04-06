@@ -61,15 +61,22 @@
             <script src='https://cdn.jsdelivr.net/gh/naptha/tesseract.js@v1.0.14/dist/tesseract.min.js'></script>
             <script>
                 $("#Question").change(function (e) {
-                    Tesseract.recognize(this.files[0],{
-                        lang: 'eng'
-                    })
-                        .progress(message => console.log(message))
+                    Tesseract.recognize(this.files[0])
+                        .progress(message => {
+                            $('#loaderScanWrapper').show();
+
+                            let perc = message.progress *100;
+                            if(!isNaN(parseInt(perc))){
+                                $("#loaderScan").css({width: parseInt(perc)+"%"})
+                            }
+                        })
                         .catch(err => console.error(err))
                         .then(result => {
+                            $('#loaderScanWrapper').hide();
                           $.each(result.paragraphs,function (key,value) {
                               $("#resultQuestion").append("<p>"+value.text+"</p>");
-                          })
+                          });
+
                         })
                         .finally(resultOrError => console.log(resultOrError))
                 });

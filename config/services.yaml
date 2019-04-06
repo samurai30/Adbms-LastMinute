@@ -48,5 +48,11 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: 'College Programs', label: Semester }
 
+    admin.chapters:
+        class: App\Admin\ChapterAdmin
+        arguments: [~, App\Entity\Chapters, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'College Programs', label: Chapters }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
