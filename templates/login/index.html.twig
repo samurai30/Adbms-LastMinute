@@ -7,8 +7,8 @@
 
      <div class="container" style="max-width: 600px;">
          <div class="row white z-depth-4" style="padding: 10px; border-radius: 10px;" >
-             <div class="deep-purple-text lighten-1 center" style="padding: 10px;">
-                 <p class="flow-text">LOGIN STUDENT | TEACHER</p>
+             <div class="deep-purple-text lighten-4 center" style="padding: 10px;">
+                 <p class="flow-text" style="font-weight: bold">LOGIN STUDENT | TEACHER</p>
              </div>
              <form class="col s12" action="{{ path('SecuredLogin') }}" id="formLogin" method="post">
                  <div class="row">
@@ -24,11 +24,14 @@
                          <p>{{ error.message }}</p>
                      {% endif %}
                  </div>
-                 <div class="row right">
+                 <div class="row center">
                      <input type="submit" value="Login" id="Login" name="Login" class="btn btn-large deep-purple lighten-1">
                  </div>
-                 <div class="row">
+                 <div class="row center">
                      <a href="#">Forgot Password?</a>
+                 </div>
+                 <div class="row center">
+                     <a href="{{ path('studentRegister') }}" class="orange-text">Not Registered?</a>
                  </div>
 
              </form>

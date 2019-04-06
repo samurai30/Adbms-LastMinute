@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Chapters;
 use App\Entity\Questions;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -15,6 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AddQuestionsType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -27,7 +30,10 @@ class AddQuestionsType extends AbstractType
                 'choices' => $this->buildYearChoices(),
                 'mapped' => false
             ])
-            ->add('chapter')
+            ->add('chapter',EntityType::class,[
+                'class' => Chapters::class,
+
+            ])
             ->add('submit',SubmitType::class,[
                 'attr' => ['class'=>'btn right btn-large orange lighten-3',
                     'style' => 'font-weight: bold'],

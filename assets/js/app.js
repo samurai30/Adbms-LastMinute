@@ -86,6 +86,13 @@ $(document).ready(async function () {
         axios.post('/teacher/manual',formData).then((res)=>{
              if(res.data === 'success'){
                  $('#add_questions').trigger("reset");
+                 let toastSuccess = '<span>Question Added Successfully.</span>';
+                 let toastAddMore = '<span>Add More as you like.</span>';
+                 M.toast({html: toastSuccess});
+                 M.toast({html: toastAddMore});
+             }else {
+                 let toastError = '<span>I am toast content</span><button class="btn-flat toast-action">Undo</button>';
+                 M.toast({html: toastError});
              }
         });
      }
