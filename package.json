@@ -14,12 +14,15 @@
     "dependencies": {
         "@tensorflow-models/universal-sentence-encoder": "^1.0.1",
         "@tensorflow/tfjs": "1.0.0",
+        "add": "^2.0.6",
         "axios": "^0.18.0",
         "chart.js": "^2.8.0",
         "child_process": "^1.0.2",
         "compute-cosine-similarity": "^1.0.0",
+        "expose-loader": "^0.7.5",
         "jquery": "^3.3.1",
         "materialize-css": "^1.0.0",
-        "regenerator-runtime": "^0.13.2"
+        "regenerator-runtime": "^0.13.2",
+        "yarn": "^1.15.2"
     }
 }

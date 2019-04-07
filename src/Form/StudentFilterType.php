@@ -4,7 +4,10 @@ namespace App\Form;
 
 use App\Entity\Subjects;
 use App\Repository\SubjectsRepository;
+use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderExecuterInterface;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\SharedableFilterType;
 use Symfony\Component\Form\AbstractType;
@@ -35,6 +38,15 @@ class StudentFilterType extends AbstractType
             ->add('subName',ChoiceFilterType::class,[
                     'choices' => $this->repository->getSubject($user->getCourse()->getId())
             ])
+            ->add('sem', SemesterFilterType::class,
+                [
+                    'add_shared' => function (FilterBuilderExecuterInterface $qbe){
+                        $closure = function (QueryBuilder $filterBuilder,$alias,$joinAlias,Expr $expr){
+                            $filterBuilder->leftJoin($alias.'.sem',$joinAlias);
+                        };
+                        $qbe->addOnce($qbe->getAlias().'.sem','opt3',$closure);
+                    },
+                ])
         ;
     }
 

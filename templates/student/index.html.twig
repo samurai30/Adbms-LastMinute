@@ -5,12 +5,90 @@
 {% block body %}
 
     <main class="valign-wrapper">
-        <div class="container">
-            {{ form_start(form) }}
-                <div class="input-field" id="form_chapter"></div>
-            {{ form_end(form) }}
-        </div>
+      <div class="container">
+          <div class="row white z-depth-3" style="padding: 1%;border-radius: 20px;">
+              <div class="col m5 grey lighten-3" style="padding: 4%; border-radius: 20px;">
+                  {{ form_start(form,{'attr':{'id':'search_Question'}}) }}
+                  <div class="input-field" id="form_chapter"></div>
+                  {{ form_end(form) }}
+              </div>
+              <div class="col m7 orange lighten-3" style="border-radius: 20px;" id="display_result">
+
+              </div>
+          </div>
+      </div>
     </main>
 
+{% endblock %}
+{% block javascripts %}
+
+    {{ parent() }}
+    <script>
+        let finalData = [];
+
+        $(document).ready(async function () {
+
+
+            {% if question|length <=0 %}
+                $('#display_result').html("<div class='center'> <h1>Sorry No Results found</h1> </div>")
+            {% else %}
+            let data = [];
+            let question = [];
+            {% for ques in question  %}
+
+            console.log("{{ ques.question }}");
+
+            var b = {'question': "{{ ques.question }}" ,
+                'marks': "{{ ques.marks }}",
+                'answer': "{{ ques.answers }}",
+                'chapter': "{{ ques.chapter.chapterName }}"};
+            question.push("{{ ques.question }}");
+            data.push(b);
+            {% endfor %}
+            await checkSim(question,data);
+
+            finalData.sort();
+            finalData.reverse();
+            finalData.forEach(function (item) {
+
+                item.forEach(function (value) {
+
+                })
+            });
+            {% endif %}
+       });
+
+        async function checkSim(question,data) {
+            const model = await use.load();
+            const embeddings = await model.embed(question);
+
+            for (let i = 0; i < data.length; i++) {
+                var similarData = [];
+                similarData.push(data[i]);
+                for (let j = i; j < data.length; j++) {
+                    const sentenceI = embeddings.slice([i, 0], [1]);
+                    const sentenceJ = embeddings.slice([j, 0], [1]);
+                    const sentenceITranspose = false;
+                    const sentenceJTransepose = true;
+                    const score =
+                        sentenceI.matMul(sentenceJ, sentenceITranspose, sentenceJTransepose)
+                            .dataSync();
+                    let simSocr = score * 100;
+
+                    if(i === j){
+
+                    }else {
+                        console.log(parseInt(simSocr));
+                        console.log(i+" "+j);
+                        if(parseInt(simSocr)>50){
+                            similarData.push(data[j]);
+                        }
+                    }
+                }
+
+                finalData.push(similarData);
+             }
+        }
+    </script>
 
 {% endblock %}

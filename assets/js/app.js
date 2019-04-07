@@ -37,18 +37,13 @@ let myChart = new Chart(ctx, {
 });
 */
 
-const use = require('@tensorflow-models/universal-sentence-encoder');
 
-const  tf = require('@tensorflow/tfjs');
 
 require('regenerator-runtime/runtime');
 
-const sentences = [
-   'Dbms is very important subject',
-   'One of the important subject is Dbms',
-    'explain c++'
-];
 
+export const use = require('@tensorflow-models/universal-sentence-encoder');
+global.use = use;
 
 
 $(document).ready(async function () {
@@ -98,7 +93,6 @@ $(document).ready(async function () {
         });
      }
    })
-
 
 
 

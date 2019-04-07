@@ -19,6 +19,19 @@ class SemesterRepository extends ServiceEntityRepository
         parent::__construct($registry, Semester::class);
     }
 
+
+    public function getSemester(){
+        $results = $this->createQueryBuilder('c')
+            ->select('DISTINCT c.SemName')
+            ->getQuery()
+            ->getResult();
+
+        $sem = [];
+        foreach ($results as $result){
+            $sem += [$result['SemName'] => $result['SemName']];
+        }
+        return $sem;
+    }
     // /**
     //  * @return Semester[] Returns an array of Semester objects
     //  */

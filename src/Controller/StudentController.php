@@ -10,6 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class StudentController extends AbstractController
 {
@@ -34,16 +37,25 @@ class StudentController extends AbstractController
     {
         $filterBuilder = $this->getDoctrine()->getRepository(Questions::class)->createQueryBuilder('e');
         $form = $this->createForm(QuestionsFilterType::class,null,['user' => $this->getUser()]);
-
+        $ques = null;
         $form->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
+
             $this->builderUpdater->addFilterConditions($form,$filterBuilder);
             $ques =  $filterBuilder->getQuery()->getResult();
+
             dump($ques);
+
+            return $this->render('student/index.html.twig', [
+                'form' => $form->createView(),
+                'question' => $ques
+            ]);
         }
 
+
         return $this->render('student/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'question' => null
         ]);
     }
 }

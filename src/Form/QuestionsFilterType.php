@@ -30,7 +30,11 @@ class QuestionsFilterType extends AbstractType
                 'user' => $options['user'],
                 'label' => false
             ])
-            ->add('submit',SubmitType::class)
+            ->add('tags')
+            ->add('submit',SubmitType::class,[
+                'attr' => ['class'=> 'btn btn-large red lighten-4 right'],
+                'label' => 'Search'
+            ])
         ;
     }
 
