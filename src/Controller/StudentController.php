@@ -36,10 +36,10 @@ class StudentController extends AbstractController
         $form = $this->createForm(QuestionsFilterType::class,null,['user' => $this->getUser()]);
 
         $form->handleRequest($request);
-        if($form->isSubmitted()){
+        if($form->isSubmitted()&&$form->isValid()){
             $this->builderUpdater->addFilterConditions($form,$filterBuilder);
             $ques =  $filterBuilder->getQuery()->getResult();
-            dump($ques); die;
+            dump($ques);
         }
 
 

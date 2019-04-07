@@ -6,10 +6,14 @@ use App\Entity\Chapters;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderExecuterInterface;
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\SharedableFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\TextFilterType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ChaptersFilterType extends AbstractType
@@ -17,7 +21,6 @@ class ChaptersFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('chapterName',TextFilterType::class)
             ->add('subject', StudentFilterType::class,[
                 'add_shared' => function (FilterBuilderExecuterInterface $qbe){
                     $closure = function (QueryBuilder $filterBuilder,$alias,$joinAlias,Expr $expr){
@@ -28,6 +31,19 @@ class ChaptersFilterType extends AbstractType
                 'user' => $options['user']
             ])
         ;
+        $builder->get('subject')->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            function (FormEvent $event){
+                $form = $event->getForm();
+                $data = $event->getData();
+
+                $form->getParent()->add('chapterName', ChoiceFilterType::class,[
+                    'label' => 'Chapters',
+                    'required' => true
+
+                ]);
+            }
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)
