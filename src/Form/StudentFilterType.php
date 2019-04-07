@@ -35,8 +35,6 @@ class StudentFilterType extends AbstractType
             ->add('subName',ChoiceFilterType::class,[
                     'choices' => $this->repository->getSubject($user->getCourse()->getId())
             ])
-
-
         ;
     }
 

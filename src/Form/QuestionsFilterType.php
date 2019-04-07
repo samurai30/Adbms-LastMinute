@@ -27,7 +27,8 @@ class QuestionsFilterType extends AbstractType
                     };
                     $qbe->addOnce($qbe->getAlias().'.chapter','opt1',$closure);
                 },
-                'user' => $options['user']
+                'user' => $options['user'],
+                'label' => false
             ])
             ->add('submit',SubmitType::class)
         ;

@@ -36,9 +36,9 @@ class TeacherController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid() ){
             $em = $this->getDoctrine()->getManager();
-            $chapterId = $request->request->get('add_questions')['chapter'];
+            /*$chapterId = $request->request->get('add_questions')['chapter'];
             $chapter = $em->getRepository(Chapters::class)->find($chapterId);
-            $questions->setChapter($chapter);
+            $questions->setChapter($chapter);*/
             $jsonText = $request->request->get('chipsData');
             $decodedText = html_entity_decode($jsonText);
             $myArray = json_decode($decodedText, true);

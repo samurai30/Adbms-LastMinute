@@ -35,6 +35,21 @@ class SubjectsRepository extends ServiceEntityRepository
 
     }
 
+    public function getChapSub($value){
+        $results = $this->createQueryBuilder('c')
+            ->where('c.course = :val')
+            ->setParameter('val',$value)
+            ->getQuery()
+            ->getResult();
+
+        $subjectArray = [];
+        foreach ($results as $result){
+            $subjectArray += [$result->getSubName() => $result->getId()];
+        }
+        return $subjectArray;
+
+            }
+
     // /**
     //  * @return Subjects[] Returns an array of Subjects objects
     //  */

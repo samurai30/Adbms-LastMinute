@@ -35,6 +35,21 @@ class ChaptersRepository extends ServiceEntityRepository
         }
         return $chapterArray;
     }
+
+    public function getChapBySub($value){
+        $results = $this->createQueryBuilder('c')
+            ->select('c, cc')
+            ->leftJoin('c.subject','cc')
+            ->where('cc.subName = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult();
+        $chapterArray = [];
+        foreach ($results as $result){
+            $chapterArray += [$result->getChapterName() => $result->getChapterName()];
+        }
+        return $chapterArray;
+    }
     // /**
     //  * @return Chapters[] Returns an array of Chapters objects
     //  */
