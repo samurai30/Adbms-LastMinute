@@ -38,7 +38,6 @@ class Questions
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Chapters", inversedBy="questions")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotBlank(message="Please select one")
      */
     private $chapter;
 

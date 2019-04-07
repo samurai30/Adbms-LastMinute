@@ -123,19 +123,3 @@ $(document).ready(async function () {
 });
 
 
-let subject = $('#add_questions_subjects');
-let sub_token = $('#add_questions__token');
-
-subject.change(function () {
-    let form = $(this).closest('form');
-    let data = {};
-    data[sub_token.attr('name')] = sub_token.val();
-    data[form.attr('name')] = form.val();
-    $.post(form.attr('action'),data).then((res)=>{
-
-        $('#add_questions').replaceWith(
-            $(res).find('#add_questions')
-        );
-           $('select').formSelect();
-    });
-});

@@ -6,6 +6,7 @@ use App\Entity\Chapters;
 use App\Entity\Questions;
 use App\Entity\Subjects;
 use App\Repository\SubjectsRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -19,6 +20,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AddQuestionsType extends AbstractType
 {
+    /**
+     * @var ChaptersRepository
+     */
+    private $repository;
+    /**
+     * AddQuestionsType constructor.
+     * @param EntityManagerInterface $repository
+     */
+    public function __construct(EntityManagerInterface $repository)
+    {
+        $this->repository = $repository;
+    }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
@@ -33,14 +46,9 @@ class AddQuestionsType extends AbstractType
                 'choices' => $this->buildYearChoices(),
                 'mapped' => false
             ])
-            ->add('subjects',EntityType::class,[
-                 'class' => Subjects::class,
-                 'query_builder' => function(SubjectsRepository $subjectsRepository) use($options){
-                    return $subjectsRepository->createQueryBuilder('c')
-                        ->where('c.course = :val')
-                        ->setParameter('val', $options['user']->getCourse()->getId());
-                 },
-                 'mapped' => false,
+            ->add('chapter',ChoiceType::class,[
+                'choices' => $this->repository->getRepository(Chapters::class)->getChapters($user->getCourse()->getId()),
+                'mapped' => false
             ])
             ->add('submit',SubmitType::class,[
                 'attr' => ['class'=>'btn right btn-large orange lighten-3',
@@ -48,16 +56,7 @@ class AddQuestionsType extends AbstractType
                 'label' => 'ADD'
             ])
         ;
-        $builder->get('subjects')->addEventListener(
-            FormEvents::POST_SUBMIT,
-            function (FormEvent $event){
-                $form = $event->getForm();
-                dump($form);
-                $form->getParent()->add('chapter',EntityType::class,[
-                    'class' => Chapters::class,
-                ]);
-            }
-        );
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -39,4 +39,11 @@ class ChapterAdmin extends AbstractAdmin
             ->add('subject', 'many_to_one');
         }
 
+    public function prePersist($object)
+    {
+
+        $chapterName= $object->getChapterName()."-".$object->getSubject()->getSubName();
+        $object->setChapterName($chapterName);
+
+    }
 }

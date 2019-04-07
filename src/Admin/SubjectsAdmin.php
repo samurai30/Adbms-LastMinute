@@ -6,7 +6,6 @@ namespace App\Admin;
 
 use App\Entity\Courses;
 use App\Entity\Semester;
-use function Sodium\add;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -43,6 +42,12 @@ class SubjectsAdmin extends AbstractAdmin
             ->add('course','many_to_one')
             ->add('sem','many_to_one');
     }
+    public function prePersist($object)
+    {
 
+        $chapterName= $object->getSubName()."-".$object->getCourse()->getCourseName();
+        $object->setSubName($chapterName);
+
+    }
 
 }

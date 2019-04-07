@@ -33,6 +33,7 @@ class Subjects
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Semester", inversedBy="subjects")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="please select")
      */
     private $sem;
 
