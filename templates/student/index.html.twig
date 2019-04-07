@@ -12,7 +12,7 @@
                   <div class="input-field" id="form_chapter"></div>
                   {{ form_end(form) }}
               </div>
-              <div class="col m7 orange lighten-3" style="border-radius: 20px;" id="display_result">
+              <div class="col m7" style="border-radius: 20px;" id="display_result">
 
               </div>
           </div>
@@ -49,12 +49,19 @@
 
             finalData.sort();
             finalData.reverse();
+            var stringDiv = "";
             finalData.forEach(function (item) {
-
+                stringDiv +="<li><div class='collapsible-header'><ul class='collapsible'>";
                 item.forEach(function (value) {
+                    stringDiv+="<li><div class='collapsible-header'>"+value['question']+"</div></li>"
+                });
 
-                })
+                stringDiv += "</ul></div></li>"
+
             });
+            console.log(stringDiv);
+            $('#display_result').html("<ul class='collapsible'>"+stringDiv+"</ul>");
+            $('.collapsible').collapsible();
             {% endif %}
        });
 
